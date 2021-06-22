@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import AuthWrapper from "./style";
+import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 
@@ -12,7 +13,7 @@ export default function Login() {
     return (
         <AuthWrapper>
             <h1>MyWallet</h1>
-            <form>
+            <Form>
                 <Input placeholder={"E-mail"}
                         type={"email"}
                         value={ email } 
@@ -28,7 +29,7 @@ export default function Login() {
                 <Button type={"submit"}
                         text={"Entrar"}
                 />
-            </form>
+            </Form>
             <Link to={"/register"}>Primeira vez? Cadastre-se!</Link>
         </AuthWrapper>
     );

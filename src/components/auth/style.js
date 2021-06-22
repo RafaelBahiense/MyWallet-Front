@@ -14,15 +14,6 @@ const AuthWrapper = styled.div`
         color: #FFFFFF;
         margin-bottom: 24px;
     }
-
-    & > form {
-        width: 100%;
-        padding: 0px 25px 0px 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-    }
     
     a {
         font-weight: bold;

@@ -21,9 +21,7 @@ const InputWrapper = styled.input`
     margin-bottom: 13px;
     border: none;
     padding-left: 15px;
-
-    ::placeholder {
-        font-size: 20px;
-        color: #000000;
-    }
+    font-size: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 `;

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import AuthWrapper from "./style";
+import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 
@@ -14,7 +15,7 @@ export default function Register() {
     return (
         <AuthWrapper>
             <h1>MyWallet</h1>
-            <form>
+            <Form>
                 <Input placeholder={"Nome"}
                         type={"text"}
                         value={ name }
@@ -42,8 +43,8 @@ export default function Register() {
                 <Button type={"submit"}
                         text={"Cadastrar"}
                 />
-            </form>
-            <Link to={"/"}>Já tem uma conta? Entre agora!</Link>
+            </Form>
+            <Link to={"/login"}>Já tem uma conta? Entre agora!</Link>
         </AuthWrapper>
     );
 }

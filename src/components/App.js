@@ -3,8 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import WebFont from 'webfontloader';
 
-import Login from "./Auth/Login";
-import Register from "./Auth/Register";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import Deposit from "./operations/Deposit";
+import Withdrawal from "./operations/Withdrawal";
 
 import ResetCSS from "../styles/ResetCSS";
 
@@ -22,11 +24,17 @@ export default function App() {
             <ResetCSS/>
             <BrowserRouter>
                 <Switch>
-                    <Route path="/" exact={true}>
+                    <Route path="/login" exact={true}>
                         <Login/>
                     </Route>
                     <Route path="/register" exact={true}>
                         <Register/>
+                    </Route>
+                    <Route path="/deposit" exact={true}>
+                        <Deposit/>
+                    </Route>
+                    <Route path="/withdrawal" exact={true}>
+                        <Withdrawal/>
                     </Route>
                 </Switch>
             </BrowserRouter>
