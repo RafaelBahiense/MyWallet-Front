@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import WebFont from 'webfontloader';
 
+import Home from "./home/Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Deposit from "./operations/Deposit";
@@ -24,6 +25,9 @@ export default function App() {
             <ResetCSS/>
             <BrowserRouter>
                 <Switch>
+                    <Route path="/" exact={true}>
+                        <Home/>
+                    </Route>
                     <Route path="/login" exact={true}>
                         <Login/>
                     </Route>
