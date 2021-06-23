@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export default function Input(props) {
-    const { placeholder, type, value, onChange, required } = props;
+    const { placeholder, type, value, onChange, required, disabled } = props;
     return (
         <InputWrapper placeholder={placeholder}
                         type={type}
                         value={value}
                         onChange={onChange}
                         required={required}
+                        disabled={disabled}
         />
     );
 }
