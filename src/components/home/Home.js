@@ -1,9 +1,28 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { AddCircleOutline, RemoveCircleOutline, ExitOutline } from 'react-ionicons'
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import Entry from "./Entry";
 
 export default function Home() {
+    const [entries, setEntries] = useState([]);
     const history = useHistory();
+
+    useEffect(() => { 
+        async function requestHistory () {
+            try {
+                const request = await axios.get("http://localhost:4000/api/history");
+                setEntries(request.data);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        requestHistory();
+    },[])
+
+
     return (
         <HomeWrapper>
             <span>
@@ -11,9 +30,16 @@ export default function Home() {
                 <ExitOutline height="24px" width="24px" color={"#FFFFFF"}/>
             </span>
             <ListCanvas>
-                <span>
-                    <p>Não há registros de<br></br>entrada ou saída</p>
-                </span>
+                {entries.length > 0
+                    ?
+                    <ul>
+                        {entries.map((entry, index) => (<Entry key={index} {...entry}/>))}
+                    </ul>
+                    :
+                    <span>
+                        <p>Não há registros de<br></br>entrada ou saída</p>
+                    </span>
+                }
             </ListCanvas>
             <OperationSelection>
                 <div onClick={() => history.push("/deposit")}>
@@ -54,9 +80,11 @@ const HomeWrapper = styled.div`
 
 const ListCanvas = styled.div`
     margin: 0px 25px;
+    padding: 23px 12px 12px;
     height: 446px;
     background: #FFFFFF;
     border-radius: 5px;
+    font-family: Raleway;
 
     & >  span {
         height: 100%;
@@ -70,6 +98,11 @@ const ListCanvas = styled.div`
             color: #868686;
             text-align: center;
         }
+    }
+
+    & > ul {
+        width: 100%;
+        font-size: 19px;
     }
 `;
 

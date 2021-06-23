@@ -9,6 +9,8 @@ export default function Input(props) {
                         onChange={onChange}
                         required={required}
                         disabled={disabled}
+                        min={"0.00"}
+                        step={.01}
         />
     );
 }

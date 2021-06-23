@@ -3,8 +3,9 @@ import axios from "axios";
 import { ArrowForwardOutline } from 'react-ionicons'
 import { useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
+import CurrencyInput from 'react-currency-input-field';
 
-import OperationsWrapper from "./style";
+import {OperationsWrapper, CurrencyInputWrapper} from "./style";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
@@ -21,7 +22,8 @@ export default function Deposit() {
         if(!loader) {
             try {
                 setLoader(true);
-                await axios.post("http://localhost:4000/api/deposit", {value, description});
+                const normalizedValue = Number(value.replace(",",".")).toFixed(2) * 100;
+                await axios.post("http://localhost:4000/api/deposit", {value: normalizedValue, description});
                 setValue("");
                 setDescription("");
             } catch (e) {
@@ -30,7 +32,6 @@ export default function Deposit() {
             setLoader(false);
         }
     }
-
     return (
         <OperationsWrapper>
             <span>
@@ -42,13 +43,16 @@ export default function Deposit() {
                 />
             </span>
             <Form onSubmit={deposit}>
-                <Input placeholder={"Valor"}
-                        type={"number"}
-                        value={ value } 
-                        onChange={ (e) =>  setValue(e.target.value) }
-                        disabled={loader}
-                        required
-                />
+                <CurrencyInputWrapper>
+                    <CurrencyInput
+                        placeholder={"Valor"}
+                        decimalsLimit={2}
+                        decimalSeparator={","}
+                        groupSeparator={"."}
+                        value={ value }
+                        onValueChange={(newValue) => newValue === undefined ? setValue("") : setValue(newValue)}
+                    />
+                </CurrencyInputWrapper>
                 <Input placeholder={"Descrição"}
                         type={"text"}
                         value={ description }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const OperationsWrapper = styled.div`
+export const OperationsWrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -21,4 +21,17 @@ const OperationsWrapper = styled.div`
     }
 `;
 
-export default OperationsWrapper;
+export const CurrencyInputWrapper = styled.span`
+    input {
+        width: 100%;
+        height: 58px;
+        background: #FFFFFF;
+        border-radius: 5px;
+        margin-bottom: 13px;
+        border: none;
+        padding-left: 15px;
+        font-size: 20px;
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+    }
+`;
