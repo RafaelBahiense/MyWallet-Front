@@ -1,7 +1,9 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { AddCircleOutline, RemoveCircleOutline, ExitOutline } from 'react-ionicons'
 
 export default function Home() {
+    const history = useHistory();
     return (
         <HomeWrapper>
             <span>
@@ -14,12 +16,12 @@ export default function Home() {
                 </span>
             </ListCanvas>
             <OperationSelection>
-                <div>
+                <div onClick={() => history.push("/deposit")}>
                     <AddCircleOutline height="22px" width="22px" color={"#FFFFFF"}/>
                     <p>Nova<br></br>entrada</p>
                 </div>
                 <span></span>
-                <div>
+                <div onClick={() => history.push("/withdrawal")}>
                     <RemoveCircleOutline height="22px" width="22px" color={"#FFFFFF"}/>
                     <p>Nova<br></br>saída</p>
                 </div>

@@ -6,13 +6,19 @@ const OperationsWrapper = styled.div`
     flex-direction: column;
     font-family: Raleway;
 
-    h1 {
-        margin: 25px 25px 40px;
-        font-weight: 700;
-        font-size: 26px;
-        color: #FFFFFF;
+    & > span {
+        width: 100%;
+        padding: 25px 25px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+            font-weight: 700;
+            font-size: 26px;
+            color: #FFFFFF;
+        }
     }
-    
 `;
 
 export default OperationsWrapper;

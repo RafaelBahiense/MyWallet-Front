@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+import { ArrowForwardOutline } from 'react-ionicons'
+import { useHistory } from "react-router-dom";
 
 import OperationsWrapper from "./style";
 import Form from "../shared/Form";
@@ -9,10 +12,28 @@ export default function Withdrawal() {
     const [value, setValue] = useState("");
     const [description, setDescription] =  useState("");
 
+    const history = useHistory();
+
+    function withdrawal (event) {
+        event.preventDefault();
+        try {
+            const request =  axios.post("http://localhost:4000/api/deposit", {value, description}); 
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <OperationsWrapper>
-            <h1>Nova saída</h1>
-            <Form>
+            <span>
+                <h1>Nova saída</h1>
+                <ArrowForwardOutline height="24px"
+                                        width="24px"
+                                        color={"#FFFFFF"}
+                                        onClick={() => history.push("/")}
+                />
+            </span>
+            <Form onSubmit={withdrawal}>
                 <Input placeholder={"Valor"}
                         type={"number"}
                         value={ value } 
