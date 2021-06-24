@@ -1,12 +1,12 @@
 # ![icon](./public/img/icon.svg)
-# Web App de gerencimento financeiro
-### Criado na semana 15 do bootcamp Responde Aí
-## Tecnologias Utilizadas:
+# MyWallet - Financial management control Web App
+### Project developed during week 15, Bootcamp Responde Aí offered by Responde Aí.
+## The following tools were used in the construction of the project:
 |HTML|CSS|JavaScript|ReactJS|
 |-|-|-|-|
 |![icon](./public/img/html.png)|![icon](./public/img/css.png)|![icon](./public/img/javascript.png)|![icon](./public/img/react.png)|
-|Sintaxe JSX|Utilizado na estilização das páginas e dos componentes com styled components|Aplicação das funcionalidades com o Framework React|Recursos Utilizados: Function Components, React Router DOM, React Hooks|
+|JSX syntax|CSS styling and styled components|ECMAScript 2015 (ES6) features|React is a JavaScript library for building user interfaces, declarative and component-based|
 ___
-[Clique aqui](https://my-wallet-front-six.vercel.app/) para acessar o App
+[Click here](https://my-wallet-front-six.vercel.app/) to acess the App
 ___
-![print](./public/img/screenshot.png)
+![screenshot](./public/img/screenshot.png)
