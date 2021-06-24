@@ -6,6 +6,19 @@ export const OperationsWrapper = styled.div`
     flex-direction: column;
     font-family: Raleway;
 
+    & > div {
+        display: flex;
+        margin: 25px 25px 22px;
+        width: 325px;
+        height: 58px;
+        background: white;
+        border-radius: 5px;
+        font-weight: bold;
+        color: green;
+        justify-content: center;
+        align-items: center;
+    }
+
     & > span {
         width: 100%;
         padding: 25px 25px 22px;

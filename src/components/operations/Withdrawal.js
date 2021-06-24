@@ -11,10 +11,11 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 
 export default function Withdrawal(props) {
-    const {user} = props;
+    const {removeUser, user} = props;
     const [value, setValue] = useState("");
     const [description, setDescription] =  useState("");
     const [loader, setLoader] = useState(false);
+    const [message, setMessage] = useState(false);
 
     const history = useHistory();
 
@@ -22,12 +23,25 @@ export default function Withdrawal(props) {
         event.preventDefault();
         if(!loader) {
             try {
+                const {token} = user;
+                const config = {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
                 setLoader(true);
                 const normalizedValue = Number(value.replace(",",".")).toFixed(2) * 100;
-                await axios.post("http://localhost:4000/api/withdrawal", {value: normalizedValue, description});
+                await axios.post("http://localhost:4000/api/withdrawal", {value: normalizedValue, description}, config);
                 setValue("");
                 setDescription("");
+                setMessage("Saída adicionada")
             } catch (e) {
+                if(e.hasOwnProperty("message") && e.message === "Network Error") setMessage("Não foi possvel conectar ao servidor!");
+                if(e.response !== undefined && e.response.status === 404) {
+                    alert("Faça login novamente!");
+                    removeUser();
+                    history.push("/login");
+                }
                 console.log(e);
             }
             setLoader(false);
@@ -66,6 +80,7 @@ export default function Withdrawal(props) {
                         text={loader ? <Loader type="ThreeDots" color="#FFF" height={46} width={46}/> : "Salvar saída"}
                 />
             </Form>
+            { message ? <div>{message}</div> : null }
         </OperationsWrapper>
     );
 }

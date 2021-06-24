@@ -15,10 +15,21 @@ export default function Home(props) {
     useEffect(() => { 
         async function requestHistory () {
             try {
-                const request = await axios.get("http://localhost:4000/api/history");
+                const {token} = user;
+                const config = {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+                const request = await axios.get("http://localhost:4000/api/history", config);
                 setEntries(request.data);
-            } catch (e) {
-                console.log(e);
+            } catch (error) {
+                if(error.response !== undefined && error.response.status === 401) {
+                    alert("Faça login novamente!");
+                    removeUser()
+                    history.push("/login");
+                }
+                console.log(error);
             }
         }
         requestHistory();

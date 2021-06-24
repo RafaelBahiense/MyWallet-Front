@@ -46,16 +46,16 @@ export default function App() {
                         <Home removeUser={removeUser} user={user}/>
                     </Route>
                     <Route path="/login" exact={true}>
-                        <Login createUser={createUser}/>
+                        <Login removeUser={removeUser} createUser={createUser}/>
                     </Route>
                     <Route path="/register" exact={true}>
                         <Register/>
                     </Route>
                     <Route path="/deposit" exact={true}>
-                        <Deposit user={user}/>
+                        <Deposit removeUser={removeUser} user={user}/>
                     </Route>
                     <Route path="/withdrawal" exact={true}>
-                        <Withdrawal user={user}/>
+                        <Withdrawal removeUser={removeUser} user={user}/>
                     </Route>
                 </Switch>
             </BrowserRouter>
