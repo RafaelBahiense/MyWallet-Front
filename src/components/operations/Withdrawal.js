@@ -10,7 +10,8 @@ import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 
-export default function Withdrawal() {
+export default function Withdrawal(props) {
+    const {user} = props;
     const [value, setValue] = useState("");
     const [description, setDescription] =  useState("");
     const [loader, setLoader] = useState(false);

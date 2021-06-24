@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function Input(props) {
-    const { placeholder, type, value, onChange, required, disabled, id, name } = props;
+    const { placeholder, type, value, onChange, required, disabled, id, name, min, max } = props;
     return (
         <InputWrapper placeholder={placeholder}
                         type={type}
@@ -9,10 +9,11 @@ export default function Input(props) {
                         onChange={onChange}
                         required={required}
                         disabled={disabled}
-                        min={"0.00"}
-                        step={.01}
+                        min={min}
+                        max={max}
                         id={id}
                         name={name}
+
         />
     );
 }

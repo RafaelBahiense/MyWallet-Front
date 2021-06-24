@@ -6,7 +6,8 @@ import axios from "axios";
 
 import Entry from "./Entry";
 
-export default function Home() {
+export default function Home(props) {
+    const {removeUser, user} = props;
     const [entries, setEntries] = useState([]);
     const [total, setTotal] = useState(0);
     const history = useHistory();
@@ -28,7 +29,7 @@ export default function Home() {
         <HomeWrapper>
             <span>
                 <h1>Olá, Fulano</h1>
-                <ExitOutline height="24px" width="24px" color={"#FFFFFF"}/>
+                <ExitOutline height="24px" width="24px" color={"#FFFFFF"} onClick={removeUser}/>
             </span>
             <ListCanvas>
                 {entries.length > 0

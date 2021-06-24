@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import WebFont from 'webfontloader';
@@ -12,6 +12,8 @@ import Withdrawal from "./operations/Withdrawal";
 import ResetCSS from "../styles/ResetCSS";
 
 export default function App() {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
     useEffect(() => {
         WebFont.load({
           google: {
@@ -20,25 +22,40 @@ export default function App() {
         });
     }, []);
 
+    if (!user && !['/login', '/register'].includes(window.location.pathname))
+		window.location.pathname = '/login';
+	else if (user && ['/login', '/register'].includes(window.location.pathname))
+		window.location.pathname = '/';
+
+    const createUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
+		setUser(user);
+	};
+
+	const removeUser = () => {
+		localStorage.removeItem('user');
+		setUser(null);
+	};
+
     return (
         <AppWrapper>
             <ResetCSS/>
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact={true}>
-                        <Home/>
+                        <Home removeUser={removeUser} user={user}/>
                     </Route>
                     <Route path="/login" exact={true}>
-                        <Login/>
+                        <Login createUser={createUser}/>
                     </Route>
                     <Route path="/register" exact={true}>
                         <Register/>
                     </Route>
                     <Route path="/deposit" exact={true}>
-                        <Deposit/>
+                        <Deposit user={user}/>
                     </Route>
                     <Route path="/withdrawal" exact={true}>
-                        <Withdrawal/>
+                        <Withdrawal user={user}/>
                     </Route>
                 </Switch>
             </BrowserRouter>

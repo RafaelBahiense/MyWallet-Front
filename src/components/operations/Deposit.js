@@ -10,7 +10,8 @@ import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 
-export default function Deposit() {
+export default function Deposit(props) {
+    const {user} = props;
     const [value, setValue] = useState("");
     const [description, setDescription] =  useState("");
     const [loader, setLoader] = useState(false);

@@ -8,6 +8,19 @@ const AuthWrapper = styled.div`
     align-items: center;
     font-family: Raleway;
 
+    & > div {
+        display: flex;
+        margin-bottom: 20px;
+        width: 325px;
+        height: 58px;
+        background: white;
+        border-radius: 5px;
+        font-weight: bold;
+        color: red;
+        justify-content: center;
+        align-items: center;
+    }
+
     h1 {
         font-family: Saira Stencil One;
         font-size: 32px;

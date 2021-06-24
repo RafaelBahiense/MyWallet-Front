@@ -14,27 +14,45 @@ export default function Register() {
     const [password, setPassword] =  useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(false);
     const history = useHistory();
     
     async function register(event) {
         event.preventDefault();
-        if(password === confirmPassword){
+        if(validInfos()){
             try {
                 setLoader(true);
-                const response = await axios.post("http://localhost:4000/api/register",{name, email, password,});
-                if(!response.status === 200) throw new Error(response.status);
+                await axios.post("http://localhost:4000/api/register",{name, email, password,});
                 history.push("/login");
             } catch (error) {
+                if(error.hasOwnProperty("message") && error.message === "Network Error") setError("Não foi possvel conectar ao servidor!");
+                if(error.response !== undefined && error.response.status === 409) setError("Usuario já cadastrado!");
+                if(error.response !== undefined && error.response.status === 400) setError("Informações inválidas!");
                 console.log(error);
             }
-        } else {
-            console.log("errado")
         }
         setLoader(false);
     }
 
+    function validInfos() {
+        if(name.length < 3) {
+            setError("Nome mínimo de 3 caracteres!");
+            return false;
+        };
+        if(password !== confirmPassword) {
+            setError("As senhas não coincidem!");
+            return false;
+        };
+        if(password.length < 8) {
+            setError("Senha mínima de 8 caracteres!")
+            return false;
+        };
+        return true;
+    }
+
     return (
         <AuthWrapper>
+            {error ? <div>{error}</div> : null}
             <h1>MyWallet</h1>
             <Form onSubmit={register}>
                 <Input placeholder={"Nome"}

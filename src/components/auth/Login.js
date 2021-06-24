@@ -8,27 +8,39 @@ import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 
-export default function Login() {
+export default function Login(props) {
+    const {createUser} = props;
     const [email, setEmail] = useState("");
     const [password, setPassword] =  useState("");
     const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(false);
     const history = useHistory();
 
     async function login(event) {
         event.preventDefault();
-        try {
-            setLoader(true);
-            const response = await axios.post("http://localhost:4000/api/login",{email, password});
-            if(!response.status === 200) throw new Error(response.status);
-            history.push("/");
-        } catch (error) {
-            console.log(error);
+        if(password.length >= 8) {
+            try {
+                setLoader(true);
+                const response = await axios.post("http://localhost:4000/api/login",{email, password});
+                console.log(response);
+                if(!response.status === 200) throw new Error(response.status);
+                createUser(response.data)
+                history.push("/");
+            } catch (error) {
+                if(error.hasOwnProperty("message") && error.message === "Network Error") setError("Não foi possvel conectar ao servidor!");
+                if(error.response !== undefined && error.response.status === 400) setError("Informações inválidas!");
+                if(error.response !== undefined && error.response.status === 404) setError("Esse usuário não existe!");
+                console.log(error);
+            }
+            setLoader(false);
+        } else {
+            setError("Senha mínima de 8 caracteres!")
         }
-        setLoader(false);
     }
 
     return (
         <AuthWrapper>
+            {error ? <div>{error}</div> : null}
             <h1>MyWallet</h1>
             <Form onSubmit={login}>
                 <Input placeholder={"E-mail"}
