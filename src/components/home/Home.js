@@ -12,15 +12,16 @@ export default function Home(props) {
     const [total, setTotal] = useState(0);
     const history = useHistory();
 
+    const {token} = user;
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
     useEffect(() => { 
         async function requestHistory () {
             try {
-                const {token} = user;
-                const config = {
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
                 const request = await axios.get("http://localhost:4000/api/history", config);
                 console.log(request.data);
                 setEntries(request.data);
@@ -36,12 +37,18 @@ export default function Home(props) {
         requestHistory();
     },[])
 
+    async function logout() {
+        removeUser()
+        await axios.post("http://localhost:4000/api/logout",{}, config);
+        history.push("/login");
+    }
+
 
     return (
         <HomeWrapper>
             <span>
                 <h1>Olá, Fulano</h1>
-                <ExitOutline height="24px" width="24px" color={"#FFFFFF"} onClick={removeUser}/>
+                <ExitOutline height="24px" width="24px" color={"#FFFFFF"} onClick={logout}/>
             </span>
             <ListCanvas>
                 {entries.length > 0
