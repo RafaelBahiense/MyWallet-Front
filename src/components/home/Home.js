@@ -8,6 +8,7 @@ import Entry from "./Entry";
 
 export default function Home() {
     const [entries, setEntries] = useState([]);
+    const [total, setTotal] = useState(0);
     const history = useHistory();
 
     useEffect(() => { 
@@ -32,9 +33,15 @@ export default function Home() {
             <ListCanvas>
                 {entries.length > 0
                     ?
-                    <ul>
-                        {entries.map((entry, index) => (<Entry key={index} {...entry}/>))}
-                    </ul>
+                    <div>
+                        <ul>
+                            {entries.map((entry, index) => (<Entry key={index} {...entry}/>))}
+                        </ul>
+                        <span>
+                            <span>Saldo</span>
+                            <span></span>
+                        </span>
+                    </div>
                     :
                     <span>
                         <p>Não há registros de<br></br>entrada ou saída</p>
@@ -99,11 +106,20 @@ const ListCanvas = styled.div`
             text-align: center;
         }
     }
-
-    & > ul {
+    & > div {
+        height: 100%;
         width: 100%;
-        font-size: 19px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        ul {
+            width: 100%;
+            font-size: 19px;
+        }
+
+
     }
+
 `;
 
 const OperationSelection = styled.div`

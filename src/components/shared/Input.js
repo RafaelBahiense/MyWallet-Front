@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function Input(props) {
-    const { placeholder, type, value, onChange, required, disabled } = props;
+    const { placeholder, type, value, onChange, required, disabled, id, name } = props;
     return (
         <InputWrapper placeholder={placeholder}
                         type={type}
@@ -11,6 +11,8 @@ export default function Input(props) {
                         disabled={disabled}
                         min={"0.00"}
                         step={.01}
+                        id={id}
+                        name={name}
         />
     );
 }
@@ -27,4 +29,12 @@ const InputWrapper = styled.input`
     font-size: 20px;
     -webkit-appearance: none;
     -moz-appearance: textfield;
+
+    &:valid {
+        border: 2px solid green;
+    }
+
+    input:invalid {
+        border: 2px solid red;
+    }
 `;

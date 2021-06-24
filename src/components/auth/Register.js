@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import Loader from "react-loader-spinner";
 
 import AuthWrapper from "./style";
 import Form from "../shared/Form";
@@ -11,11 +13,30 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] =  useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loader, setLoader] = useState(false);
+    const history = useHistory();
+    
+    async function register(event) {
+        event.preventDefault();
+        if(password === confirmPassword){
+            try {
+                setLoader(true);
+                const response = await axios.post("http://localhost:4000/api/register",{name, email, password,});
+                if(!response.status === 200) throw new Error(response.status);
+                history.push("/login");
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log("errado")
+        }
+        setLoader(false);
+    }
 
     return (
         <AuthWrapper>
             <h1>MyWallet</h1>
-            <Form>
+            <Form onSubmit={register}>
                 <Input placeholder={"Nome"}
                         type={"text"}
                         value={ name }
@@ -38,10 +59,11 @@ export default function Register() {
                         type={"password"}
                         value={ confirmPassword }
                         onChange={ (e) => setConfirmPassword(e.target.value) }
+                        id={"confirm"}
                         required
                 />
                 <Button type={"submit"}
-                        text={"Cadastrar"}
+                        text={loader ? <Loader type="ThreeDots" color="#FFF" height={46} width={46}/> : "Cadastrar"}
                 />
             </Form>
             <Link to={"/login"}>Já tem uma conta? Entre agora!</Link>
