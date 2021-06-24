@@ -22,6 +22,7 @@ export default function Home(props) {
                     }
                 }
                 const request = await axios.get("http://localhost:4000/api/history", config);
+                console.log(request.data);
                 setEntries(request.data);
             } catch (error) {
                 if(error.response !== undefined && error.response.status === 401) {
