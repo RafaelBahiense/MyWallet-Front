@@ -152,6 +152,7 @@ const ListCanvas = styled.div`
     ul {
       width: 100%;
       font-size: 19px;
+      overflow-y: scroll;
     }
   }
 `;
@@ -180,6 +181,8 @@ const OperationSelection = styled.div`
 `;
 
 const Total = styled.span`
+  margin-top: 20px;
+  height: 20px;
   display: flex;
   justify-content: space-between;
 

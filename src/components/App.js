@@ -1,7 +1,7 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 
 import Home from "./home/Home";
 import Login from "./auth/Login";
@@ -12,60 +12,60 @@ import Withdrawal from "./operations/Withdrawal";
 import ResetCSS from "../styles/ResetCSS";
 
 export default function App() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-    useEffect(() => {
-        WebFont.load({
-          google: {
-            families: ['Saira Stencil One','Raleway']
-          }
-        });
-    }, []);
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Saira Stencil One", "Raleway"],
+      },
+    });
+  }, []);
 
-    if (!user && !['/login', '/register'].includes(window.location.pathname))
-		window.location.pathname = '/login';
-	else if (user && ['/login', '/register'].includes(window.location.pathname))
-		window.location.pathname = '/';
+  if (!user && !["/login", "/register"].includes(window.location.pathname))
+    window.location.pathname = "/login";
+  else if (user && ["/login", "/register"].includes(window.location.pathname))
+    window.location.pathname = "/";
 
-    const createUser = (user) => {
-		localStorage.setItem('user', JSON.stringify(user));
-		setUser(user);
-	};
+  const createUser = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
 
-	const removeUser = () => {
-		localStorage.removeItem('user');
-		setUser(null);
-	};
+  const removeUser = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
 
-    return (
-        <AppWrapper>
-            <ResetCSS/>
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact={true}>
-                        <Home removeUser={removeUser} user={user}/>
-                    </Route>
-                    <Route path="/login" exact={true}>
-                        <Login removeUser={removeUser} createUser={createUser}/>
-                    </Route>
-                    <Route path="/register" exact={true}>
-                        <Register/>
-                    </Route>
-                    <Route path="/deposit" exact={true}>
-                        <Deposit removeUser={removeUser} user={user}/>
-                    </Route>
-                    <Route path="/withdrawal" exact={true}>
-                        <Withdrawal removeUser={removeUser} user={user}/>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </AppWrapper>
-    );
+  return (
+    <AppWrapper>
+      <ResetCSS />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact={true}>
+            <Home removeUser={removeUser} user={user} />
+          </Route>
+          <Route path="/login" exact={true}>
+            <Login removeUser={removeUser} createUser={createUser} />
+          </Route>
+          <Route path="/register" exact={true}>
+            <Register />
+          </Route>
+          <Route path="/deposit" exact={true}>
+            <Deposit removeUser={removeUser} user={user} />
+          </Route>
+          <Route path="/withdrawal" exact={true}>
+            <Withdrawal removeUser={removeUser} user={user} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </AppWrapper>
+  );
 }
 
 const AppWrapper = styled.div`
-    margin:0 auto;
-    width: 375px;
-    height: 667px;
-    background: #8C11BE;
+  margin: 0 auto;
+  width: 375px;
+  height: 667px;
+  background: #8c11be;
 `;
