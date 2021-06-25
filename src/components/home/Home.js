@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Entry from "./Entry";
+import {API} from "../../config/api";
 
 export default function Home(props) {
   const { removeUser, user } = props;
@@ -27,7 +28,7 @@ export default function Home(props) {
     async function requestHistory() {
       try {
         const request = await axios.get(
-          "http://localhost:4000/api/history",
+          `${API}/api/history`,
           config
         );
         setEntries(request.data.transactions);

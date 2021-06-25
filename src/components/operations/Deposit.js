@@ -9,6 +9,7 @@ import { OperationsWrapper, CurrencyInputWrapper } from "./style";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
+import {API} from "../../config/api";
 
 export default function Deposit(props) {
   const { removeUser, user } = props;
@@ -33,7 +34,7 @@ export default function Deposit(props) {
         const normalizedValue =
           Number(value.replace(",", ".")).toFixed(2) * 100;
         await axios.post(
-          "http://localhost:4000/api/deposit",
+          `${API}/api/deposit`,
           { value: normalizedValue, description },
           config
         );

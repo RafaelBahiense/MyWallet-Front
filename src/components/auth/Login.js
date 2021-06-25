@@ -7,6 +7,7 @@ import AuthWrapper from "./style";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
+import {API} from "../../config/api";
 
 export default function Login(props) {
   const { createUser } = props;
@@ -21,7 +22,7 @@ export default function Login(props) {
     if (password.length >= 8) {
       try {
         setLoader(true);
-        const response = await axios.post("http://localhost:4000/api/login", {
+        const response = await axios.post(`${API}/api/login`, {
           email,
           password,
         });
