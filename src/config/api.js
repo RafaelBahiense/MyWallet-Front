@@ -1,1 +1,1 @@
-export const API = process.env.REACT_APP_API_HOST;
+export const API = process.env.REACT_APP_API_HOST || REACT_APP_API_HOST_LOCAL;
