@@ -1,4 +1,4 @@
-# MyWallet
+# MyWallet Frontend
 ### Financial management control Web App.
 
 <p align="center">
@@ -20,6 +20,8 @@ This is an web application which helps people meet their life goals through the 
 - History
 - Account balance
 
+[Project repo]
+
 ## Technologies
 
 ### The following tools and frameworks were used in the construction of the project:
@@ -33,6 +35,7 @@ This is an web application which helps people meet their life goals through the 
 [css]: https://www.w3schools.com/css/
 [es6]: https://262.ecma-international.org/6.0/
 [react]: https://reactjs.org/
+[Project repo]: https://github.com/RafaelBahiense/MyWallet
 
 
 
